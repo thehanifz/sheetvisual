@@ -10,15 +10,15 @@ fi
 
 body="$(cat "${PR_BODY_FILE}")"
 
-# Accept both plain labels and the bold Markdown labels emitted by the PR template:
-# Trace ID: ..., Trace IDs: ..., **Trace ID:** ..., **Trace IDs:** ...
-if ! grep -Eiq '^\*\*Trace IDs?:(\*\*)?[[:space:]]*[^<[:space:]][^[:cntrl:]]*' <<< "${body}"; then
+# Accept plain or bold Markdown labels from the approved PR template.
+# Valid examples: Trace ID: ..., Trace IDs: ..., **Trace ID:** ..., **Trace IDs:** ...
+if ! grep -Eiq '^(\*\*)?Trace IDs?:(\*\*)?[[:space:]]*[^<[:space:]][^[:cntrl:]]*' <<< "${body}"; then
   echo "Traceability validation failed: PR body must include a non-empty Trace ID or Trace IDs field." >&2
   exit 1
 fi
 
-# Accept Baseline reference: ... and **Baseline reference:** ...
-if ! grep -Eiq '^\*\*Baseline reference:(\*\*)?[[:space:]]*[^<[:space:]][^[:cntrl:]]*' <<< "${body}"; then
+# Valid examples: Baseline reference: ... or **Baseline reference:** ...
+if ! grep -Eiq '^(\*\*)?Baseline reference:(\*\*)?[[:space:]]*[^<[:space:]][^[:cntrl:]]*' <<< "${body}"; then
   echo "Traceability validation failed: PR body must include a non-empty Baseline reference field." >&2
   exit 1
 fi
