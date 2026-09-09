@@ -38,6 +38,16 @@ Local stack (PostgreSQL + Redis + API + worker) akan di-setup di Phase 1.4. Untu
 
 ---
 
+## Repository Foundation
+
+Repository governance is active under Phase 1. PRs must declare a Trace ID, baseline reference, and change classification. See `docs/implementation/traceability-matrix.md`.
+
+## Configuration Foundation
+
+Phase 1 configuration is typed and fail-fast. Copy `.env.example` to `.env` for local placeholders only; never commit `.env`. See `docs/implementation/configuration.md`.
+
+---
+
 ## Governance
 
 - **Architecture baseline:** Part 1–6 FINAL / APPROVED (immutable tanpa controlled revision).

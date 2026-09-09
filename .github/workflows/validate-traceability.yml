@@ -1,0 +1,28 @@
+name: Validate Traceability
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  validate-pr-metadata:
+    name: Validate Trace ID and baseline reference
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Write pull request body
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: printf '%s' "$PR_BODY" > /tmp/pr-body.md
+
+      - name: Validate required traceability metadata
+        run: bash scripts/validate_traceability_pr.sh /tmp/pr-body.md
+
+      - name: Run validator negative/positive tests
+        run: bash scripts/test_validate_traceability_pr.sh
