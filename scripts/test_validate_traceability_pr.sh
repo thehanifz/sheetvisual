@@ -5,7 +5,7 @@ validator="scripts/validate_traceability_pr.sh"
 tmpdir="$(mktemp -d)"
 trap 'rm -rf "${tmpdir}"' EXIT
 
-cat > "${tmpdir}/valid.md" <<'EOF'
+cat > "${tmpdir}/valid-plain.md" <<'EOF'
 # Pull Request
 
 Trace ID: TRACE-SETUP-01
@@ -14,7 +14,23 @@ Baseline reference: Master Plan v1.0 §17
 - [x] `implements`
 EOF
 
-"${validator}" "${tmpdir}/valid.md"
+"${validator}" "${tmpdir}/valid-plain.md"
+
+cat > "${tmpdir}/valid-template-markdown.md" <<'EOF'
+# Pull Request
+
+## Traceability
+
+**Trace IDs:** TRACE-SETUP-01, CONFIG-VALID-01
+
+**Baseline reference:** Master Plan v1.0 §17
+
+## Change Classification
+
+- [x] `implements`
+EOF
+
+"${validator}" "${tmpdir}/valid-template-markdown.md"
 
 cat > "${tmpdir}/missing-trace.md" <<'EOF'
 # Pull Request
