@@ -1,0 +1,27 @@
+# CODEOWNERS for thehanifz/sheetvisual
+# Format: path_pattern owner(s)
+# Documentation: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Architecture & Implementation documentation
+/docs/architecture/ @thehanifz
+/docs/implementation/ @thehanifz
+
+# Backend (FastAPI application)
+/backend/ @thehanifz
+
+# Worker (Celery runtime)
+/worker/ @thehanifz
+
+# Frontend (PWA/web application)
+/frontend/ @thehanifz
+
+# Shared artifacts (API contract, fixtures, test vectors)
+/shared/ @thehanifz
+
+# Infrastructure (IaC, environments, database, redis, observability, CI)
+/infra/ @thehanifz
+
+# Root-level governance files
+/CODEOWNERS @thehanifz
+/README.md @thehanifz
+/.github/ @thehanifz
